@@ -44,26 +44,3 @@ bot.onText(/\/administration/, (msg) => {
     bot.sendMessage(chatId, 'مجلد الإدارة غير موجود.');
     return;
   }
-
-  // حذف الملف المضغوط السابق إن وجد
-  if (fs.existsSync(outputZip)) {
-    fs.unlinkSync(outputZip);
-  }
-
-  // إنشاء الملف المضغوط
-  const output = fs.createWriteStream(outputZip);
-  const archive = archiver('zip', { zlib: { level: 9 } });
-
-  output.on('close', () => {
-    bot.sendDocument(chatId, outputZip);
-  });
-
-  archive.on('error', (err) => {
-    bot.sendMessage(chatId, 'حدث خطأ أثناء ضغط الملفات.');
-    console.error(err);
-  });
-
-  archive.pipe(output);
-  archive.directory(docsFolder, false);
-  archive.finalize();
-});
