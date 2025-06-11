@@ -13,7 +13,7 @@ const bot = new TelegramBot(token, { polling: true });
 
 bot.onText(/\/implementation/, (msg) => {
   const chatId = msg.chat.id;
-  const filePath = path.join(__dirname, 'implementation.doc');
+  const filePath = path.join(__dirname, 'cours-implementation-SQL-SERVER-S4.doc');
 
   if (fs.existsSync(filePath)) {
     bot.sendDocument(chatId, filePath).catch((err) => {
