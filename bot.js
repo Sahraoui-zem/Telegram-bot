@@ -1,11 +1,8 @@
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 const path = require('path');
-const archiver = require('archiver');
 
-// استخدم متغير البيئة
 const token = process.env.BOT_TOKEN;
-
 const bot = new TelegramBot(token, { polling: true });
 
 bot.onText(/\/start/, (msg) => {
@@ -37,10 +34,11 @@ bot.onText(/\/implementation/, (msg) => {
 
 bot.onText(/\/administration/, (msg) => {
   const chatId = msg.chat.id;
-  const outputZip = path.join(__dirname, 'administration_docs.zip');
-  const docsFolder = path.join(__dirname, 'administration_docs');
+  const zipPath = path.join(__dirname, 'administration_docs.zip');
 
-  if (!fs.existsSync(docsFolder)) {
-    bot.sendMessage(chatId, 'مجلد الإدارة غير موجود.');
-    return;
+  if (fs.existsSync(zipPath)) {
+    bot.sendDocument(chatId, zipPath);
+  } else {
+    bot.sendMessage(chatId, 'الملف المضغوط administration_docs.zip غير موجود.');
   }
+});
