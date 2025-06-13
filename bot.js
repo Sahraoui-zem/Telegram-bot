@@ -14,7 +14,7 @@ bot.onText(/\/start/, (msg) => {
 الأوامر المتوفرة:
 📄 /implementation — تحميل ملف شرح التنفيذ (Implementation)
 📚 /administration — تحميل مجموعة ملفات الإدارة (Administration)
-🖼️ /Delphi — عرض صور مجلد Delphi
+🖼️ /delphi — عرض صور مجلد Delphi
 
 إذا واجهت أي مشكلة، لا تتردد في التواصل معنا: @Designn_Art
   `;
@@ -44,7 +44,7 @@ bot.onText(/\/administration/, (msg) => {
   }
 });
 
-bot.onText(/\/Delphi/, (msg) => {
+bot.onText(/\/delphi/, (msg) => {
   const chatId = msg.chat.id;
   const imagesDir = path.join(__dirname, 'Delphi');
 
