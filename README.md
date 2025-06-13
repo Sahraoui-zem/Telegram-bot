@@ -1,6 +1,6 @@
-# Telegram Bot for Sending .doc File
+# Telegram Bot for Sending .doc Files and images
 
-This is a Telegram bot built using Node.js that responds to `/implementation` by sending a `.doc` file.
+This is a Telegram bot built using Node.js that responds to `/implementation` `/administration` `/delphi` by sending a `.doc` file and `img`
 
 ## How to Run on Render
 
