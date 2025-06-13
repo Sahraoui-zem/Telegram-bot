@@ -14,8 +14,9 @@ bot.onText(/\/start/, (msg) => {
 الأوامر المتوفرة:
 📄 /implementation — تحميل ملف شرح التنفيذ (Implementation)
 📚 /administration — تحميل مجموعة ملفات الإدارة (Administration)
+🖼️ /Delphi — عرض صور مجلد Delphi
 
-إذا واجهت أي مشكلة، لا تتردد في التواصل معنا.
+إذا واجهت أي مشكلة، لا تتردد في التواصل معنا: @Designn_Art
   `;
 
   bot.sendMessage(chatId, welcomeMessage);
@@ -41,4 +42,31 @@ bot.onText(/\/administration/, (msg) => {
   } else {
     bot.sendMessage(chatId, 'الملف المضغوط administration_docs.zip غير موجود.');
   }
+});
+
+bot.onText(/\/Delphi/, (msg) => {
+  const chatId = msg.chat.id;
+  const imagesDir = path.join(__dirname, 'Delphi');
+
+  fs.readdir(imagesDir, (err, files) => {
+    if (err || files.length === 0) {
+      bot.sendMessage(chatId, 'لم يتم العثور على صور في مجلد Delphi.');
+      return;
+    }
+
+    const imageFiles = files.filter(file =>
+      /\.(jpg|jpeg|png|gif)$/i.test(file)
+    );
+
+    if (imageFiles.length === 0) {
+      bot.sendMessage(chatId, 'لا توجد صور صالحة في مجلد Delphi.');
+      return;
+    }
+
+    // إرسال الصور واحدة تلو الأخرى
+    imageFiles.forEach((file) => {
+      const filePath = path.join(imagesDir, file);
+      bot.sendPhoto(chatId, fs.createReadStream(filePath));
+    });
+  });
 });
